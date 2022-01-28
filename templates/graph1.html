@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+
+
+
+
+
+
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+ *{
+    margin: 0;
+    padding: 0;
+    font-family: 'Yusei Magic', sans-serif;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+header{
+    width: 100%;
+    height: 100vh;
+}
+nav{
+    width: 100%;
+    height: 15vh;
+    background:  rgb(51, 102, 0);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: uppercase;
+}
+nav .website-names{
+    color: white;
+    width: 20%;
+    text-align: center;
+}
+.website-names h1{
+    letter-spacing: 3px;
+}
+nav .menu a{
+    color: white;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+nav .menu{
+    display: flex;
+    width: 40%;
+    justify-content: space-around;
+}
+main{
+    display: flex;
+    background-image: url('https://cdn.dribbble.com/users/1061750/screenshots/4314775/research.gif');
+    width: 100%;
+    height: 85vh;
+    justify-content: center;
+    align-items: center;
+}
+section h3{
+    font-size: 35px;
+    font-weight: 200;
+    letter-spacing: 3px;
+    text-shadow: 1px 1px 2px black;
+}
+section h1{
+    margin: 30px 0px 20px 0px;
+    font-size: 55px;
+    font-weight: 700;
+    text-shadow: 2px 1px 5px black;
+    text-transform: uppercase;
+}
+.change-text:after{
+    content: '';
+    animation: changetext 5s infinite linear;
+    color: white;
+}
+@keyframes changetext{
+    0%{content: 'Boy';}
+    20%{content: 'WEB Developer';}
+    40%{content: 'Student';}
+    60%{content: 'Python Developer';}
+    80%{content: 'Thinker';}
+    100%{content: 'Indian';}
+}
+nav .menu a:hover{
+    color: black;
+    transition: 0.7s;
+}
+nav .menu a:first-child{
+    color: black;
+}
+
+
+.button1 {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.button2 {
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+}
+
+.button2:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button4 {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
+.button4:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.button3 {
+  background-color: white;
+  color: black;
+  border: 2px solid #f44336;
+}
+
+.button3:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+.can1{
+width:500px;
+heigth:400px;
+}
+.can2{
+left: 100px;
+top: 150px;
+width:500px;
+heigth:400px;
+}
+</style>
+<body>
+<nav>
+            <div class="website-names">
+                <h2>Inventory System</h2>
+            </div>
+            <div class="menu">
+                {% if user.is_authenticated%}
+
+
+                <a href="/">Home</a>
+                <li>Hello, {{user.first_name}} </li>
+<!--                <a href="/fetch/data/"><button onclick="alert('Data Stored in Database')">Store</button></a>-->
+                <a href="/inventory/show_laptop/">Inventory</a>
+               <a href="/inventory/graph/">Graphs</a>
+                <a href="/accounts/logout/">Logout</a>
+
+                {% else %}
+                <a href="/accounts/register/">Register</a>
+                <a href="/accounts/login/">Login</a>
+                {%endif%}
+
+            </div>
+        </nav>
+<br>
+<br>
+{%if warning == "True" %}
+
+ <div class="alert alert-danger">
+     <center><strong>Alert!</strong> No data are present in the database add data and retry....</center>
+</div>
+
+{%else%}
+ <table>
+    <tr>
+        <td><div  style="width: 490px; height: 100px;"><div class="w3-card-4 " style="width:100%">  <div class="w3-display-container w3-text-black">
+      <div class="w3-xlarge w3-display-bottomcenter w3-padding " style="text-align: center;">PRODUCT COUNT</div>
+  </div>
+
+  <div class="w3-row">
+    <div class="w3-third w3-center">
+      <h5>LAPTOP</h5>
+      <p>{{laptop_count}}<p>
+    </div>
+    <div class="w3-third w3-center">
+      <h5>DESKTOP</h5>
+      <p>{{desktop_count}}<p>
+    </div>
+    <div class="w3-third w3-center w3-margin-bottom">
+      <h5>MOBILE</h5>
+      <p>{{mobile_count}}<p>
+    </div>
+  </div></div></div></td>
+        <td><div id="chart_div" style="width: 490px; height: 100px;"><div class="w3-card-4" style="width:100%">  <div class="w3-display-container w3-text-black">
+      <div class="w3-xlarge w3-display-bottomcenter w3-padding " style="text-align: center;">SOLD REVENUE</div>
+  </div>
+
+  <div class="w3-row">
+    <div class="w3-third w3-center">
+      <h5>LAPTOP</h5>
+      <p>{{laptop_price_sold}}<p>
+    </div>
+    <div class="w3-third w3-center">
+      <h5>DESKTOP</h5>
+      <p>{{desktop_price_sold}}<p>
+    </div>
+    <div class="w3-third w3-center w3-margin-bottom">
+      <h5>MOBILE</h5>
+      <p>{{mobile_price_sold}}<p>
+    </div>
+  </div></div></div></td>
+
+        <td><div id="chart_div" style="width: 490px; height: 100px;"><div class="w3-card-4" style="width:100%">  <div class="w3-display-container w3-text-black">
+      <div class="w3-xlarge w3-display-bottomcenter w3-padding " style="text-align: center;">HOLD REVENUE</div>
+  </div>
+
+  <div class="w3-row">
+    <div class="w3-third w3-center">
+      <h5>LAPTOP</h5>
+      <p>{{laptop_price_hold}}<p>
+    </div>
+    <div class="w3-third w3-center">
+      <h5>DESKTOP</h5>
+      <p>{{desktop_price_hold}}<p>
+    </div>
+    <div class="w3-third w3-center w3-margin-bottom">
+      <h5>MOBILE</h5>
+      <p>{{mobile_price_hold}}<p>
+    </div>
+  </div></div></div></td>
+    </tr>
+ </table>
+<br><br>
+ <table>
+    <tr>
+        <td><div id="chart_div" style="width: 750px; height: 400px;"><canvas id="myChart" ></canvas></div></td>
+        <td><div id="chart2_div" style="width: 750px; height: 400px;"><canvas id="myChart1" ></canvas></div></td>
+    </tr>
+ <table>
+
+<script>
+  const labels = {{status|safe}};
+   colorhex=['#eb4034','#388a56','#383b8a','#f0e92b']
+  const data = {
+    labels: labels,
+
+    datasets: [{
+      label: 'Price',
+      backgroundColor: colorhex,
+      borderColor: '#0a0a0a',
+      data: {{price|safe}},
+    }],
+
+  };
+  const labels1 = {{issues|safe}};
+  colorhex=['#eb4034','#388a56','#383b8a','#f0e92b']
+    const data1 = {
+    labels: labels1,
+    datasets: [{
+      label: 'Price',
+      backgroundColor: colorhex,
+      borderColor: '#0a0a0a',
+      data: {{issues_count|safe}},
+    }]
+  };
+
+  const config = {
+                 type: 'bar',
+                    data: data,
+                        options: {
+                            scales: {
+                            xAxes:[{
+                                gridLines:{
+                                display:false,
+                                }
+                            }],
+                         yAxes:[{
+                            gridLines:{
+                            display:false,
+                            }
+                            }]
+                            }
+                            }
+                };
+
+  const config1 = {
+    type: 'pie',
+    data: data1,
+    options: {}
+  };
+</script>
+  {%endif%}
+</body>
+<script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>
+<script>
+  const myChart1 = new Chart(
+    document.getElementById('myChart1'),
+    config1
+  );
+</script>
+</html>
+
+

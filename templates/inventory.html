@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>INVENTORY</title>
+  </head>
+
+  <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+ *{
+    margin: 0;
+    padding: 0;
+    font-family: 'Yusei Magic', sans-serif;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+header{
+    width: 100%;
+    height: 100vh;
+}
+nav{
+    width: 100%;
+    height: 15vh;
+    background:  rgb(51, 102, 0);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: uppercase;
+}
+nav .website-names{
+    color: white;
+    width: 20%;
+    text-align: center;
+}
+.website-names h1{
+    letter-spacing: 3px;
+}
+nav .menu a{
+    color: white;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+nav .menu{
+    display: flex;
+    width: 40%;
+    justify-content: space-around;
+}
+main{
+    display: flex;
+    background-image: url('https://cdn.dribbble.com/users/1061750/screenshots/4314775/research.gif');
+    width: 100%;
+    height: 85vh;
+    justify-content: center;
+    align-items: center;
+}
+section h3{
+    font-size: 35px;
+    font-weight: 200;
+    letter-spacing: 3px;
+    text-shadow: 1px 1px 2px black;
+}
+section h1{
+    margin: 30px 0px 20px 0px;
+    font-size: 55px;
+    font-weight: 700;
+    text-shadow: 2px 1px 5px black;
+    text-transform: uppercase;
+}
+.change-text:after{
+    content: '';
+    animation: changetext 5s infinite linear;
+    color: white;
+}
+@keyframes changetext{
+    0%{content: 'Boy';}
+    20%{content: 'WEB Developer';}
+    40%{content: 'Student';}
+    60%{content: 'Python Developer';}
+    80%{content: 'Thinker';}
+    100%{content: 'Indian';}
+}
+nav .menu a:hover{
+    color: black;
+    transition: 0.7s;
+}
+nav .menu a:first-child{
+    color: black;
+}
+
+
+.button1 {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.button2 {
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+}
+
+.button2:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button4 {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+}
+.button4:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.button3 {
+  background-color: white;
+  color: black;
+  border: 2px solid #f44336;
+}
+
+.button3:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+
+.alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+</style>
+  <body>
+          <nav>
+            <div class="website-names">
+                <h2>Inventory System</h2>
+            </div>
+            <div class="menu">
+                {% if user.is_authenticated%}
+
+
+                <a href="/">Home</a>
+                <li>Hello, {{user.first_name}} </li>
+<!--                <a href="/fetch/data/"><button onclick="alert('Data Stored in Database')">Store</button></a>-->
+                <a href="/inventory/show_laptop/">Inventory</a>
+               <a href="/inventory/graph/">Graphs</a>
+                <a href="/accounts/logout/">Logout</a>
+
+                {% else %}
+                <a href="/accounts/register/">Register</a>
+                <a href="/accounts/login/">Login</a>
+                {%endif%}
+
+            </div>
+        </nav>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+
+    <center> <h2>INVENTORY DATA</h2></center>
+    <div class="menu">
+        <center><a href="/inventory/show_laptop/" class="button1 button3">Laptop</a>
+<!--        <a href="/inventory/add_laptop/" class="button1 button3">Add</a>-->
+            <a href="/inventory/add_laptop/" class="btn btn-danger btn-sm" role="button">Add</a>
+
+        <a href="/inventory/show_desktop/" class="button1 button2">Desktop</a>
+<!--        <a href="/inventory/add_desktop/" class="button1 button2">+</a>-->
+            <a href="/inventory/add_desktop/" class="btn btn-success btn-sm" role="button">Add</a>
+
+        <a href="/inventory/show_mobile/" class="button1 button4">Mobiles</a>
+<!--            <a href="/inventory/add_mobile/" class="button1 button4">+</a></center>-->
+            <a href="/inventory/add_mobile/" class="btn btn-info btn-sm" role="button">Add</a>
+    </div>
+          <br>
+          <center><h4 style="background-color: black;color: white;"> Currently viewing <b>{{header}}<b></h4></center>
+          <br>
+    <center><table>
+        <tr>
+     <th>id</th>
+    <th>Model</th>
+    <th>Price</th>
+    <th>Status</th>
+    <th>Issues</th>
+
+  </tr>
+  {% for i in items%}
+  <tr>
+    <td>{{i.id}}</td>
+    <td>{{i.type}}</td>
+    <td>{{i.price}}</td>
+    <td>{{i.status}}</td>
+    <td>{{i.issues}}</td>
+    {%if header|lower == "laptop" %}
+      <td>
+<!--          <a href="/inventory/add_laptop/" class="btn btn-success btn-sm" role="button">Add</a>-->
+      <a href="{% url 'edit_laptop' i.id %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+          <a href="{% url 'delete_laptop' i.id %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+          </td>
+    {% elif header|lower == "mobile" %}
+      <td>
+<!--          <a href="/inventory/add_mobile/" class="btn btn-success btn-sm" role="button">Add</a>-->
+      <a href="{% url 'edit_mobile' i.id %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+          <a href="{% url 'delete_mobile' i.id %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+    </td>
+      {% else %}
+      <td>
+<!--          <a href="/inventory/add_desktop/" class="btn btn-success btn-sm" role="button">Add</a></center>-->
+      <a href="{% url 'edit_desktop' i.id %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+          <a href="{% url 'delete_desktop' i.id %}" class="btn btn-danger btn-sm" role="button">Delete</a>
+    </td>
+      {%endif%}
+  </tr>
+
+  {% endfor %}
+
+  </table></center>
+
+<!--  <div class="alert">-->
+<!--  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>-->
+<!--  {{alert}}-->
+<!--</div>-->
+
+
+  </body>
+</html>

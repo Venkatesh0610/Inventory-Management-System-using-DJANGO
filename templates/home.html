@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+
+<style>
+ *{
+    margin: 0;
+    padding: 0;
+    font-family: 'Yusei Magic', sans-serif;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+header{
+    width: 100%;
+    height: 100vh;
+}
+nav{
+    width: 100%;
+    height: 15vh;
+    background:  rgb(51, 102, 0);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: uppercase;
+}
+nav .website-name{
+    color: white;
+    width: 20%;
+    text-align: center;
+}
+.website-name h1{
+    letter-spacing: 3px;
+}
+nav .menu a{
+    color: white;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+nav .menu{
+    display: flex;
+    width: 40%;
+    justify-content: space-around;
+}
+main{
+    display: flex;
+    background-image: url('https://cdn.dribbble.com/users/1061750/screenshots/4314775/research.gif');
+    width: 100%;
+    height: 85vh;
+    justify-content: center;
+    align-items: center;
+}
+section h3{
+    font-size: 35px;
+    font-weight: 200;
+    letter-spacing: 3px;
+    text-shadow: 1px 1px 2px black;
+}
+section h1{
+    margin: 30px 0px 20px 0px;
+    font-size: 55px;
+    font-weight: 700;
+    text-shadow: 2px 1px 5px black;
+    text-transform: uppercase;
+}
+.change-text:after{
+    content: '';
+    animation: changetext 5s infinite linear;
+    color: red;
+}
+@keyframes changetext{
+    0%{content: 'LAPTOP';}
+    20%{content: 'MOBILE';}
+    40%{content: 'DESKTOP';}
+    60%{content: 'LAPTOP';}
+    80%{content: 'MOBILE';}
+    100%{content: 'DESKTOP';}
+}
+nav .menu a:hover{
+    color: black;
+    transition: 0.7s;
+}
+nav .menu a:first-child{
+    color: black;
+}
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+</style>
+
+<body>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
+
+
+ <header>
+        <nav>
+            <div class="website-name">
+                <h1>Inventory System</h1>
+            </div>
+            <div class="menu">
+                <a href="/">Home</a>
+
+                {% if user.is_authenticated%}
+                <li>Hello, {{user.first_name}} </li>
+<!--                <a href="/fetch/data/"><button onclick="alert('Data Stored in Database')">Store</button></a>-->
+                <a href="/inventory/show_laptop/">Inventory</a>
+<!--               <a href="/fetch/graph/">Graphs</a>-->
+                <a href="/inventory/graph/">Graphs</a>
+                <a href="/accounts/logout/">Logout</a>
+                {% else %}
+<!--                <a href="/fetch/data/"><button onclick="alert('Data Stored in Database')">Store</button></a>-->
+<!--                <a href="/fetch/display/">Display</a>-->
+                <a href="/accounts/register/">Register</a>
+                <a href="/accounts/login/">Login</a>
+<!--                <a href="/fetch/graph/">Graphs</a>-->
+                {%endif%}
+
+            </div>
+        </nav>
+        <main>
+            <section>
+                <h3>Welcome to the</h3>
+                <h1><span class="change-text">  </span></h1> <h3>Inventory .....</h3>
+            </section>
+        </main>
+    </header>
+</body>
+</html>>
